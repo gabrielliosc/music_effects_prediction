@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./equalizer.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>AI Music Terapy</title>
+</head>
+<body>
+    <header>
+        <img src="./equalizer.svg" alt="">
+        <h1>AI Music Terapy</h1>
+    </header>
+    <main class="container">
+        <section class="about__container">
+            <p>AI Music Terapy is a web application that uses AI to predict the effect music can have on a person based on some habits and personal information</p>
+            <p>Fill out your information bellow to predict the music effect</p>
+            <p class="important">ATENTION: All questions are required to properly predict an answer!</p>
+        </section>
+        <section class="predict__container">
+            <form id="myForm" class="personal-info" onsubmit="handleFormSubmit(event)">
+                <label for="name">
+                    Name: 
+                    <input type="text" id="name" name="name" required>
+                </label>
+                <label for="age">
+                    Age:
+                    <input type="number" id="age" name="age" max=100 required />
+                </label>
+                <label for="streaming">
+                    Primary streaming service
+                    <select id="streaming" name="streaming">
+                        <option value="spotify">Spotify</option>
+                        <option value="pandora">Pandora</option>
+                        <option value="apple">Apple Music</option>
+                        <option value="youtube">YouTube Music</option>
+                        <option value="none">None</option>
+                        <option value="other">Other Streaming</option>
+                        <option value="noAnswer" default>No Answer</option>
+                    </select>
+                </label>
+                <label for="hours">Hours per day
+                    <input type="number" id="hours" name="hours" max=24 required>
+                </label>
+                <label for="whileWorking" required>Do you listen to music while studying/working?
+                    <select name="whileWorking" id="whileWorking">
+                        <option value="noAnswer">No Answer</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </label>
+                <label for="instrumentalist">Do you play an instrument regularly?
+                    <select name="instrumentalist" id="instrumentalist">
+                        <option value="noAnswer">No Answer</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </label>
+                <label for="composer">Do you compose music?
+                    <select name="composer" id="composer">
+                        <option value="noAnswer">No Answer</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </label>
+                <label for="exploratory">Do you actively explore new artists/genres?
+                    <select name="exploratory" id="exploratory">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </label>
+                <label for="foreignLanguages">Do you regularly listen to music with lyrics in a language you are not fluent in?
+                    <select name="foreignLanguages" id="foreignLanguages">
+                        <option value="noAnswer">No Answer</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </label>
+                <label for="favGenre">Fav genre
+                    <select id="favGenre" name="favGenre">
+                        <option value="latin">Latin</option>
+                        <option value="rock">Rock</option>
+                        <option value="videoGameMusic">Video game music</option>
+                        <option value="jazz">Jazz</option>
+                        <option value="rnb">R&B</option>
+                        <option value="country">Country</option>
+                        <option value="pop">Pop</option>
+                        <option value="edm">EDM</option>
+                        <option value="reggae">Reggae</option>
+                        <option value="hipHop">Hip hop</option>
+                        <option value="metal">Metal</option>
+                        <option value="folk">Folk</option>
+                        <option value="kPop">Kpop</option>
+                        <option value="lofi">LoFi</option>
+                        <option value="classical">Classical</option>
+                        <option value="rock">Rock</option>
+                    </select>
+                </label>
+                <label for="bpm">Beats per minute of favorite genre
+                    <input type="number" id="bpm" name="bpm" required>
+                </label>
+                <label for="freqClassical">Frequency [Classical]
+                    <select id="freqClassical" name="freqClassical">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqGospel" required>Frequency [Gospel]
+                    <select id="freqGospel" name="freqGospel">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqJazz" required>Frequency [Jazz]
+                    <select id="freqJazz" name="freqJazz">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqRock" required>Frequency [Rock]
+                    <select id="freqRock" name="freqRock">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqRnb" required>Frequency [R&B]
+                    <select id="freqRnb" name="freqRnb">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqLatin" required>Frequency [Latin]
+                    <select id="freqLatin" name="freqLatin">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqVideoGameMusic" required>Frequency [Video game music]
+                    <select id="freqVideoGameMusic" name="freqVideoGameMusic">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqCountry" required>Frequency [Country]
+                    <select id="freqCountry" name="freqCountry">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqPop" required>Frequency [Pop]
+                    <select id="freqPop" name="freqPop">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqEDM" required>Frequency [Electronic]
+                    <select id="freqEDM" name="freqEDM">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqHipHop" required>Frequency [Hip hop]
+                    <select id="freqHipHop" name="freqHipHop">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqMetal">Frequency [Metal]
+                    <select id="freqMetal" name="freqMetal">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqFolk">Frequency [Folk]
+                    <select id="freqFolk" name="freqFolk">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqKPop">Frequency [Kpop]
+                    <select id="freqKPop" name="freqKPop">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqLoFi">Frequency [LoFi]
+                    <select id="freqLoFi" name="freqLoFi">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="freqRap">Frequency [Rap]
+                    <select id="freqRap" name="freqRap">
+                        <option value=0>Never</option>
+                        <option value=1>Rarely</option>
+                        <option value=2>Sometimes</option>
+                        <option value=3>Very frequently</option>
+                    </select>
+                </label>
+                <label for="anxiety">Anxiety on a scale of 0-10            
+                    <input type="number" id="anxiety" name="anxiety" max=10 required>
+                </label>
+                <label for="depression">Depression on a scale of 0-10 
+                    <input type="number" id="depression" name="depression" max=10 required>
+                </label>
+                <label for="insomnia">Insomnia on a scale of 0-10 
+                    <input type="number" id="insomnia" name="insomnia" max=10 required>
+                </label>
+                <label for="ocd">OCD on a scale of 0-10 
+                    <input type="number" id="ocd" name="ocd" max=10 required>
+                </label>
+
+                <button type="submit">Predict</button>
+            </form>
+        </section>
+        <section id="outcome" class="outcome__container hidden">
+            <h2>Prediction outcome</h2>
+            <div id="result"></div>
+        </section>
+    </main>
+    <footer>
+        <em>&copy; 2024 Developed by Gabrielli</em>
+    </footer>
+</body>
+</html>
