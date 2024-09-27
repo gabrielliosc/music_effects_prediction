@@ -1,5 +1,5 @@
 from model.validate import Verify
-from backend.model.model import Model
+from model.model import Model
 from model.preprocessing import PreProcessing
 import pandas as pd
 
@@ -16,15 +16,15 @@ dataset = PreProcessing.preprocessing_steps(dataset)
 X = dataset.drop(columns=['Music effects']).values	
 y = dataset['Music effects'].values #Target
     
-# Método para testar modelo SVM a partir do arquivo correspondente
-def test_svm_model():
-    # Importando modelo de SVM
-    svm_path = './music_model.pkl'
-    svm_model = Model.load_model(svm_path)
+# Método para testar modelo random forest a partir do arquivo correspondente
+def test_rf_model():
+    # Importando modelo de random forest
+    rf_path = './music_model.pkl'
+    rf_model = Model.load_model(rf_path)
 
-    # Obtendo as métricas do SVM
-    accuracy_svm = Verify.validate(svm_model, X, y)
+    # Obtendo as métricas do random forest
+    accuracy_rf = Verify.validate(rf_model, X, y)
     
-    # Testando as métricas do SVM
-    assert accuracy_svm >= 0.7
+    # Testando as métricas do random forest
+    assert accuracy_rf >= 0.7
 
